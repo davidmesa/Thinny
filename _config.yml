@@ -6,16 +6,20 @@ pygments:	true
 permalink:	/blog/:title
 
 # Setup
-title:		Thinny
+title:		DavidMesa
 tagline:	'blog'
 description:	'My personal blog.'
-url:		http://camporez.com
+url:		http://davidmesa.co
 commentsystem:	google
-disqus:		example
+
+comments:
+  disqus:
+    short_name: davidmesa
+    api_key:    xG1KYrl1ln55G0bdAMMUuiiOMQZ1YESzwPkjnzAbYNsET6S1zNQo7TTidJg4F9ft
 
 author:
-  name:		'Ian Camporez Brunelli'
-  url:		https://google.com/+IanCamporezBrunelli
+  name:		'David Mesa'
+  url:		https://google.com/+DavidMesaB
 
 paginate:	5
 
@@ -25,19 +29,19 @@ cover:		/assets/images/cover.jpg
 
 social:
   - icon:	twitter
-    url:	https://twitter.com/iancamporez
+    url:	https://twitter.com/davidmesa
     desc:	Follow me on twitter
 
   - icon:	github
-    url:	https://github.com/camporez
+    url:	https://github.com/davidmesa
     desc:	Fork me on github
 
   - icon:	googleplus-alt
-    url:	https://google.com/+IanCamporezBrunelli
+    url:	https://google.com/+DavidMesaB
     desc:	Add me on google+
 
   - icon:	feed
-    url:	http://camporez.com/atom.xml
+    url:	http://davidmesa.co/atom.xml
     desc:	Subscribe to my feed
     
 menu:
@@ -48,7 +52,7 @@ menu:
     url:	/about
     
 copyright:
-  author:	Camporez
-  url:		http://camporez.com
+  author:	David Mesa
+  url:		http://davidmesa.co
   type_title:	Some rights reserved
   type_url:	http://creativecommons.org/licenses/by-nc/2.5
