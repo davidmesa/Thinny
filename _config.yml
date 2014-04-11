@@ -12,11 +12,6 @@ description:	'My personal blog.'
 url:		http://www.davidmesa.co
 commentsystem:	google
 
-comments:
-  disqus:
-    short_name: davidmesa
-    api_key:    xG1KYrl1ln55G0bdAMMUuiiOMQZ1YESzwPkjnzAbYNsET6S1zNQo7TTidJg4F9ft
-
 author:
   name:		'David Mesa'
   url:		https://google.com/+DavidMesaB
