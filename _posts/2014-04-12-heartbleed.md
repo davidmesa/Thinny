@@ -1,28 +1,32 @@
 ---
 layout: post
 title: "Heartbleed"
-quote: "Este será el único post en el que hable de mi"
+quote: "Internet cae a los pies de un error ridículo"
 image: /media/2014-04-12-heartbleed/cover.jpg
 video: false
 comments: true
 ---
-# Este Blog
+Es el primer bug de seguridad en tener su propio sitio web y logo, simplemente es impresionante ver como una vulnerabilidad se convirtió en una súper estrella en internet, afectando a mas del 66% de los sitios y seguramente entre esos están los que utilizan diariamente. Heartbleed es excepcional desde cualquier punto que se vea, su sencillez, su duración en versiones estables de OpenSSL y sus implicaciones con el programa espía de la NSA.
 
-He querido hacer un blog desde hace mucho tiempo, pero la verdad pocas veces encuentro sobre que temas escribir, algo que en realidad le sirva a alguien y no simplemente un blog personal sobre los gossips mas impresionantes de mi vida. Y después de pensarlo por años, llegue a la conclusión algo obvia, pero la más natural: la mejor forma de contribuir es escribir sobre temas que me apasionan, y que logren ayudar de una forma u otra al crecimiento intelectual de mis lectores. En consecuencia a esta epifanía poco creativa, los temas que tratare en este blog van a ser extremadamente **techies**, algo **geekies**, pero escritos con el único interés de ayudar a los náufragos de la web.
+Para comenzar es importante recalcar que Heartbleed no es un virus, es un error en implementación algo ridículo, lo cual demuestra que el software siempre va ser vulnerable gracias a la imperfección o malas intenciones de los humanos. No quiero entrar a discutir teorías conspiraciones, pero a mi parecer este bug parece más un backdoor estúpidamente implementado que un error de un programador experimentado.  Volviendo a los hechos, fue introducido en diciembre del 2011 y el parche fue entregado en abril 7 del 2014, dando un espacio de tiempo de más de 2 años en los cuales nos han podido afectar.
 
-## ¿Quién es David Mesa?
 
-Para los pocos interesados que quieren saber quien soy, les tengo que advertir, he escrito muy poco de mi y no se diferenciar temas relevantes, me cuesta escribir una hoja de vida por esta misma razón. Pero aquí les va:
+## ¿Cómo funciona?
 
-Soy un colombiano nacido en la capital, el 29 de junio de 1993. Mis primeras tendencias siempre se vieron hacia la música, donde en todos las fotos familiares me veo con algún instrumento de juguete en mi mano. Pero en mi adolescencia después de darme cuenta de que apestaba tocando algo, me empecé a involucrar en el teatro. Esta siendo una actividad que aun me apasiona, dure 5 años en grupos de teatro haciendo todo tipo de papeles diversos, y conociendo gente increíble.
+Seguramente han visto un https en la parte superior del explorador, lo cual quiere decir que la información que se transmite con el sitio web esta siendo encriptada, seguramente con OpenSSL, para que terceros no la puedan interceptar. OpenSSL, el cual fue afectado, implementa una extensión conocida como Heartbeat, la cual permite mantener una conexión entre el cliente y el servidor corriendo, aunque no se haya transmitido información en algún tiempo, enviando un “latido” para demostrar que aun sigue vivo el proceso en el otro extremo, ya que es costoso volver a crear un canal de comunicación.
 
-Sin embargo llego el día de escoger que estudiar en la u, y en Colombia no hay buenas academias de teatro, cine y/o televisión, por lo tanto algo desanimado solo me inscribí la *Universidad de los Andes*, y prácticamente a pinochazo escogí *Ingeniería de Sistemas*, con la intención de al no pasar, a la que en ese entonces consideraba la mejor universidad del país, me iba a Argentina a estudiar cine. Pero pase y no me arrepiento,  me encontré con una carrera que me mueve y me hace cada día feliz, y no es por darme flores, pero no soy para nada malo.
 
 <br>
 
 {% include image.html url="/media/2014-04-12-heartbleed/cliente-servidor.jpg" width="100%" %}
 
-Finalmente, siempre he tenido mala ortografía, todo mi proceso lecto-escrito lo viví en Inglaterra, por lo tanto no tengo muy buenas bases y todo el español me ha entrado en reversa, pero hago mi esfuerzo. Así que si ven errores me pueden decir en los comentarios, pero pues la idea es que tampoco llenen las discusiones de temas de la Real Academia.
+
+El latido contiene dos fragmentes importantes para el entendimiento de este bug, el contenido del mensaje (payload) y el tamaño de dicho mensaje. Cuando el servidor recibe este heartbeat del cliente, devuelve exactamente el mismo mensaje con algo de relleno. El problema radica en que el latido puede ser construido de cualquier manera que el atacante se le ocurra, por lo tanto puede escribir un Byte en el payload y decir que el mensaje contiene 65KB de información. Consecuentemente el servidor va a extraer los 65KB que el mensaje dice contener, de su memora y la devuelve, lo que implica que el mensaje de retorno no solo contiene el payload del latido original, sino que todo lo que le seguía en memoria, lo cual podría ser información confidencial.
+
+## ¿Cómo Protegernos?
+
+No es posible conocer las implicaciones de este error, ya que los latidos no dejan rastro en el servidor, por lo tanto la fuga de información puede ser extremadamente alta, o casi nula, pero es mejor prevenir que lamentar, por lo tanto, los pasos a seguir son simples. Primero asegúrese que las paginas que utiliza ya hayan instalado el parche en sus servidores, y DESPUES de que el sitio ya no sea vulnerable es muy recomendable cambiar sus credenciales e información sensible.
+
 
 <br>
 
