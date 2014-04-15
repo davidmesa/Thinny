@@ -21,11 +21,11 @@ Seguramente han visto un https en la parte superior del explorador, lo cual quie
 {% include image.html url="/media/2014-04-12-heartbleed/cliente-servidor.jpg" width="100%" %}
 
 
-El latido contiene dos fragmentes importantes para el entendimiento de este bug, el contenido del mensaje (payload) y el tamaño de dicho mensaje. Cuando el servidor recibe este heartbeat del cliente, devuelve exactamente el mismo mensaje con algo de relleno. El problema radica en que el latido puede ser construido de cualquier manera que el atacante se le ocurra, por lo tanto puede escribir un Byte en el payload y decir que el mensaje contiene 65KB de información. Consecuentemente el servidor va a extraer los 65KB que el mensaje dice contener, de su memora y la devuelve, lo que implica que el mensaje de retorno no solo contiene el payload del latido original, sino que todo lo que le seguía en memoria, lo cual podría ser información confidencial.
+El latido contiene dos fragmentes importantes para el entendimiento de este bug, el contenido del mensaje (payload) y el tamaño de dicho mensaje. Cuando el servidor recibe este heartbeat del cliente, devuelve exactamente el mismo mensaje con algo de relleno. El problema radica en que el latido puede ser construido de cualquier manera que el atacante se le ocurra. Por lo tanto puede escribir un Byte en el payload y decir que el mensaje contiene 65KB de información. Consecuentemente el servidor va a extraer los 65KB que el mensaje dice contener, de su memora y los devuelve. Lo que implica que el mensaje de retorno no solo contiene el payload del latido original, sino que todo lo que le seguía en memoria, lo cual podría ser información confidencial.
 
 ## ¿Cómo Protegernos?
 
-No es posible conocer las implicaciones de este error, ya que los latidos no dejan rastro en el servidor, por lo tanto la fuga de información puede ser extremadamente alta, o casi nula, pero es mejor prevenir que lamentar, por lo tanto, los pasos a seguir son simples. Primero asegúrese que las paginas que utiliza ya hayan instalado el parche en sus servidores, y DESPUES de que el sitio ya no sea vulnerable es muy recomendable cambiar sus credenciales e información sensible.
+No es posible conocer las implicaciones de este error, ya que los latidos no dejan rastro en el servidor, por lo tanto la fuga de información puede ser extremadamente alta, o casi nula, pero es mejor prevenir que lamentar. Por lo tanto, los pasos a seguir son simples. Primero asegúrese que las paginas que utiliza ya hayan instalado el parche en sus servidores, y DESPUES de que el sitio ya no sea vulnerable es muy recomendable cambiar sus credenciales e información sensible.
 
 
 <br>
